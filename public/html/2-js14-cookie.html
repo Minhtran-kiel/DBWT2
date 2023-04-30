@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8">
+        <title>set get cookie</title>
+    </head>
+    <body>
+        <h2>Set and Get Counter Cookie using Javascript</h2>
+        <script>
+            // Funktion zum Setzen des Cookie-Werts
+            function setCookie(name, value){
+                var date = new Date();
+                date.setTime(date.getTime() + (365 * 24 * 60 * 66 * 1000));
+                var expires = 'expires=' + date.toUTCString();
+                document.cookie = name + '=' + value + ';' + expires;
+            }
+
+            // function zum Lesen des Cookie-Werts
+            function getCookie(name) {
+                var cookies = document.cookie.split(';');
+                for(var i = 0; i < cookies.length; i++){
+                    var cookie = cookies[i].trim();
+                    // if the cookie name is found as first index of the string
+                    if (cookie.indexOf(name + '=') === 0){
+                        // return cookie value after '='
+                        return cookie.substring(name.length + 1);
+                    }
+                }
+                return null;
+            }
+
+            // Initialisierung des Cookie-Werts
+            var counter = getCookie('counter');
+            if(counter === null){
+                counter = 0;
+            }else {
+                counter = parseInt(counter);
+            }
+
+            // Inkrementierung des Cookies-Werts
+            counter++;
+            setCookie('counter', counter);
+
+            // Ausgabe des aktuellen Cookie-Werts in der Webkonsole
+            console.log('Counter: ' + counter);
+        </script>
+    </body>
+</html>

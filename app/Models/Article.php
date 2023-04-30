@@ -10,6 +10,9 @@ class Article extends Model
     use HasFactory;
 
     protected $table = 'ab_article';
+    const CREATED_AT = null;
+    const UPDATED_AT = null;
+    
 
     protected $fillable = [
         'ab_name',

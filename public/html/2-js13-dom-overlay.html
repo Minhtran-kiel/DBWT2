@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My App</title>
+  <style>
+    .bottom-text {
+      position: absolute;
+      bottom: 0px;
+      width: 100%;
+      height: 50px;
+      background-color: #f0f0f0;
+      text-align: center;
+      line-height: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, velit vel bibendum bibendum, nunc sapien bibendum sapien, vel bibendum sapien sapien vel sapien.</p>
+  </div>
+  <div class="bottom-text">
+    This is some text at the bottom.
+  </div>
+  <script>
+    var bottomText = document.querySelector('.bottom-text');
+    var content = document.querySelector('.content');
+    var contentHeight = content.offsetHeight;
+    bottomText.style.top = contentHeight + 'px';
+  </script>
+</body>
+</html>

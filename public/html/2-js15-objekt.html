@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            let car = {
+                name,
+                type,
+                getName: function(){return this.name;},
+                setName: function(name){this.name = name;},
+                getType: function(){return this.type;},
+                setType: function(type){this.type = type;},
+                writeToConsole(){console.log('name=' + this.name + ', type=' + this.type);}
+            }
+            //var c = Object.create(car);
+
+            function car (name, type){
+                this.name = name;
+                this.type = type;
+                this.getName = function(){return this.name;};
+                this.setName = function(name){this.name = name;};
+                this.getType = function(){return this.type;};
+                this.setType = function(type){this.type = type;};
+                this.writeToConsole = function(){console.log('name=' + this.name + ', type=' + this.type);};
+            }
+            //let c = new car('Audi', '1938');
+
+            class car {
+                constructor(name, type){
+                    this.name = name;
+                    this.type = type;
+                }
+
+                writeToConsole(){
+                    console.log('name=' + this.name + ', type=' + this.type);  
+                }
+            }
+
+        // var c = new car('Audi','1998');
+
+
+        </script>
+    </body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            class User {
+                constructor(firstname, lastname){
+                    this.firstname = firstname;
+                    this.lastname = lastname;
+                }
+
+                setFirstName (firstname){
+                    this.firstname = firstname;
+                }
+
+                getFirstName(){return this.firstname;}
+
+                setLastName(lastname){
+                    this.lastname = lastname;
+                }
+                getLastName(){return this.lastname;}
+            }
+
+
+            class Buyer extends User {
+                constructor(firstname, lastname, lastBuy){
+                    super(firstname, lastname);
+                    this.lastBuy = lastBuy;
+                }
+            }
+        </script>
+    </body>
+</html>

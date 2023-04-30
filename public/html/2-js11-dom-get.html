@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8">
+        <title>Aufgabe 2-js11-dom-get</title>
+    </head>
+    <body>
+        <div id="element">This is an element</div>
+        <script>
+            var element = document.getElementById('element');
+            console.log('Before change: '+ element.outerHTML);
+            element.innerHTML = '<h2>Hello, Element</h2>';
+            console.log('After change inner HTML: ' + element.outerHTML);
+            element.innerText = 'This is an another element';
+            console.log('After change inner text: ' + element.outerHTML);
+        </script>
+    </body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8">
+        <title>Mein erstes Form in Javascript</title>
+    </head>
+    <body>
+        <script>
+            var form = document.createElement('form');
+
+            var text = document.createElement('input');
+            text.setAttribute('id', 'text');
+            text.setAttribute('type', 'text');
+
+            var label = document.createElement('label');
+            label.setAttribute('for', 'dropdown');
+
+            var select = document.createElement('select');
+            select.setAttribute('id', 'dropdown');
+
+            var option1 = document.createElement('option');
+            option1.value = 'red';
+            option1.text = 'Red';
+            select.appendChild(option1);
+
+            var option2 = document.createElement('option');
+            option2.value = 'green';
+            option2.text = 'Green';
+            select.appendChild(option2);
+
+            var option3 = document.createElement('option');
+            option3.value = 'blue';
+            option3.text = 'Blue';
+            select.appendChild(option3);
+           
+
+            form.appendChild(text);
+            form.appendChild(label);
+            form.appendChild(select);
+            
+            body = document.getElementsByTagName('body')[0];
+            body.appendChild(form);
+        </script>
+    </body>
+</html>
