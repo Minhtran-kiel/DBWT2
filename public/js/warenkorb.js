@@ -64,6 +64,19 @@ addButtons.forEach(button => {
             button.disabled = true;
             console.log(bag);
         }
+
+        // send articleid parameter with post to server
+        const endpoint = 'api/shoppingcart';
+        fetch(endpoint, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                articleId: id
+            })
+        })
+            .then(response => response)
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
     });
 });
 
@@ -73,19 +86,27 @@ table.addEventListener('click', event => {
     event.preventDefault();
     if (event.target.classList.contains('minus-from-bag')) {
 
-        let id = event.target.getAttribute('minus_button_id');
-        console.log(id);
+        let articleId = event.target.getAttribute('minus_button_id');
 
         // find article having this id in bag
-        let article = bag.find(obj => obj.id === id);
-        console.log(article);
+        let article = bag.find(obj => obj.id === articleId);
 
         // remove article from bag
         removeFromBag(article);
-        console.log(bag);
+
+        // remove article by sending request to server
+        const endpoint = `api/shoppingcart/1/articles/${articleId}`;
+        fetch(endpoint, {
+            method: 'DELETE',
+            headers: {'Content-Type': 'application/json'},
+        
+        })
+            .then(response => response)
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
 
         //update gui
-        let addButton = document.querySelector('[article_id="'+id+'"]');
+        let addButton = document.querySelector('[article_id="'+articleId+'"]');
         addButton.disabled = false;
     }
 });

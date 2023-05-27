@@ -29,6 +29,7 @@ Route::get('/articles',[App\Http\Controllers\ArticleController::class,'index'])-
 Route::post('/articles', [\App\Http\Controllers\ArticleController::class, 'store'])->name('articles.store');
 Route::get('/kategorien', [App\Http\Controllers\ArticleController::class, 'kategorien'])->name('kategorien');
 Route::get('verkaufen', [\App\Http\Controllers\ArticleController::class, 'verkaufen'])->name('verkaufen');
+Route::get('/newarticle', function(){return view('newarticle');});
 
 Route::get('/test', function(){return view('test');});
 
@@ -37,5 +38,3 @@ Route::get('/career', [App\Http\Controllers\Controller::class, 'show_career'])->
 Route::get('/philosophie', [App\Http\Controllers\Controller::class, 'show_philosophie'])->name('philosophie');
 
 Route::get('/cookiecheck', function(){return view('cookiecheck');});
-
-Route::get('/newarticle', function(){return view('newarticle');});

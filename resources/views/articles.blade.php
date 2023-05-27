@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <meta id="csrf-token" content="{{ csrf_token() }}">
     <title>articles</title>
     <script defer src="{{ asset('js/warenkorb.js') }}"></script>
 </head>

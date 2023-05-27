@@ -1,65 +1,95 @@
 'use strict';
 
-// Menüstruktur
-var menu = [
-    {
-        name: "Home",
-        link: '/menu'
-    },
-    {
-        name: "Kategorien",
-        link: '/kategorien'
-    },
-    {
-        name: "Verkaufen",
-        link: '/verkaufen'
-    },
-    {
-        name: "Unternehmen",
-        subMenu: [
+// turn menu into object
+class Menu {
+    constructor(){
+        this.menuArray = [
             {
-                name: "Philosophie",
-                link: '/philosophie'
+                name: "Home",
+                link: '/menu'
             },
             {
-                name: "Karrier",
-                link: '/career'
+                name: "Kategorien",
+                link: '/kategorien'
+            },
+            {
+                name: "Verkaufen",
+                link: '/verkaufen'
+            },
+            {
+                name: "Unternehmen",
+                subMenu: [
+                    {
+                        name: "Philosophie",
+                        link: '/philosophie'
+                    },
+                    {
+                        name: "Karrier",
+                        link: '/career'
+                    }
+                ]
             }
-        ]
+        ];
+
+        this.ul = document.createElement('ul');
     }
-];
 
-// create navigation menu in HTML
-var nav = document.createElement('nav');
-var ul = document.createElement('ul');
-var body = document.getElementsByTagName('body')[0];
-ul.id = 'navbar';
+    // turn create navigation menu in HTML into method
+    createMenu(){
+        let nav = document.createElement('nav');
+        let body = document.getElementsByTagName('body')[0];
+        this.ul.id = 'navbar';
 
-for (let i = 0; i < menu.length; i++) {
-    let li = document.createElement('li');
-    let a = document.createElement('a');
-    a.textContent = menu[i].name;
-    li.appendChild(a);
-
-    if (menu[i].subMenu) {
-        let sub_ul = document.createElement('ul');
-        for (let j = 0; j < menu[i].subMenu.length; j++) {
-            let sub_li = document.createElement('li');
-            let sub_a = document.createElement('a');
-            sub_a.href = menu[i].subMenu[j].link;
-            sub_a.textContent = menu[i].subMenu[j].name;
-            sub_li.appendChild(sub_a);
-            sub_ul.appendChild(sub_li);
+        
+        for (let i = 0; i < this.menuArray.length; i++) {
+            let li = document.createElement('li');
+            let a = document.createElement('a');
+            a.textContent = this.menuArray[i].name;
+            li.appendChild(a);
+        
+            if (this.menuArray[i].subMenu) {
+                let sub_ul = document.createElement('ul');
+                sub_ul.classList.add('submenu');
+                for (let j = 0; j < this.menuArray[i].subMenu.length; j++) {
+                    let sub_li = document.createElement('li');
+                    let sub_a = document.createElement('a');
+                    sub_a.href = this.menuArray[i].subMenu[j].link;
+                    sub_a.textContent = this.menuArray[i].subMenu[j].name;
+                    sub_li.appendChild(sub_a);
+                    sub_ul.appendChild(sub_li);
+                }
+                li.appendChild(sub_ul);
+            }
+            else {
+                a.href = this.menuArray[i].link;
+            }
+            this.ul.appendChild(li);
         }
-        li.appendChild(sub_ul);
+        nav.appendChild(this.ul);
+        body.appendChild(nav);   
     }
-    else {
-        a.href = menu[i].link;
+
+    // make the menu dynamic so submenu is not visible until clicking
+    makeMenuDyn(){
+        let menuItems = this.ul.querySelectorAll('li');
+        
+        menuItems.forEach(item => {
+            let submenu = item.querySelector('.submenu');
+
+            // add event listener if submenu exists
+            if(submenu){
+                item.addEventListener('click', () =>{
+                   submenu.style.display = submenu.style.display === 'none'? 'block': 'none';
+                });
+            }
+        });
+        
     }
-    ul.appendChild(li);
 }
 
-nav.appendChild(ul);
-body.appendChild(nav);
+var menu = new Menu();
+menu.createMenu();
+menu.makeMenuDyn();
 
+     
 

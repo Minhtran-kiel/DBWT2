@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <script>
+        'use strict';
+        function sendRequest() {
+            var request = new XMLHttpRequest();
+            request.onload = () => {
+                var json = request.response;
+
+                var p = document.createElement(p);
+                p.textContent = json.message;
+
+                var body = document.getElementsByTagName('body')[0];
+                body.appendChild(p);
+            }
+            request.open('GET', '../static/message.json');
+            request.responseType = 'json';
+            request.setRequestHeader('Accept', 'application/json');
+            request.send();
+        }
+        setInterval(sendRequest, 3000);
+    </script>
+</body>
+
+</html>

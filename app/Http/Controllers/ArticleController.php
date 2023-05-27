@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use Illuminate\Contracts\Support\ValidatedData;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * Controller for tasks refered to articles
@@ -19,19 +20,60 @@ class ArticleController extends Controller
         return view('articles', compact('articles', 'searchTerm'));
     }
 
+    public function index_api(Request $request)
+    {
+        $searchTerm = $request->input('search');
+        $articles = Article::query()->where('ab_name', 'ilike', '%' . $searchTerm  . '%')->get();
+        return response()->json(['articles' => $articles], 200);
+    }
+
+    public function store_api(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|min:1',
+            'price' => 'required|numeric|min:1',
+            'description' => 'string'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->messages()
+            ], 422);
+        } else {
+            $article = new Article;
+            $article->id = 31;
+            $article->ab_name = $request->name;
+            $article->ab_price = $request->price;
+            $article->ab_description = $request->description;
+            $article->ab_creator_id = 6;
+            $article->ab_createdate = \Carbon\Carbon::now();
+            $article->save();
+        }
+
+        if ($article) {
+            return response()->json([
+                'id' => $article->id,
+                'message' => 'new article created successfully'
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Something went wrong'
+            ], 500);
+        }
+    }
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([
             'name' => 'required',
             'price' => 'required|numeric|min:0',
             'description' => 'required',
-        ], [
-            'name.required' => 'Please enter the name of the article.',
-            'price.required' => 'Please enter the price of the article.',
-            'price.numeric' => 'The price of the article must be a number.',
-            'price.min' => 'The price of the article must be at least 0.',
-            'description.required' => 'Please enter a description of the article.',
         ]);
+
+        $existingArticle = Article::query()->where('ab_name','=', $validatedData['name'])->first();
+        if($existingArticle){
+            return response()->json(['message' => 'Article already exists.'], 409);
+        }
 
         // Persist the validated data to the database
         $article = new Article;
@@ -43,6 +85,10 @@ class ArticleController extends Controller
         $article->ab_createdate = \Carbon\Carbon::now();
         $article->save();
 
+        // when using AJAX, the response from the server is received by the cleint-side js code
+        // and it's up to the js code to handle the response
+        // so this line will not work as expected 
+        // -> Lösung: redirect using window.location.href in client-side js code
         return redirect('/articles')->with('success', 'Article added successfully!');
     }
 
