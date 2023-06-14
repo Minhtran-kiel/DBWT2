@@ -23,8 +23,29 @@ class ArticleController extends Controller
     public function index_api(Request $request)
     {
         $searchTerm = $request->input('search');
-        $articles = Article::query()->where('ab_name', 'ilike', '%' . $searchTerm  . '%')->get();
-        return response()->json(['articles' => $articles], 200);
+        // Pagination parameters
+        $page = $request->input('page', 1); // Default to page 1 if not provided
+        $perPage = 5;
+        $offset = ($page - 1) * $perPage;
+
+        // Fetch paginated articles based on search term
+        $articles = Article::query()
+            ->where('ab_name','ilike','%'. $searchTerm . '%')
+            ->offset($offset)
+            ->limit($perPage)
+            ->get();
+
+        // Count the total number of articles (without pagination)
+        $totalCount = Article::query()
+            ->where('ab_name','ilike','%'.$searchTerm.'%')
+            ->count();
+        
+        $totalPages = ceil($totalCount / $perPage);
+
+        return response()->json([
+            'articles' => $articles,
+            'totalPages' => $totalPages], 
+            200);
     }
 
     public function store_api(Request $request)

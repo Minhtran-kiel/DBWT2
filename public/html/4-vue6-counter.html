@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8">
+        <script src="https://unpkg.com/vue@3"></script>
+    </head>
+    <body>
+        <button v-on:click="increase">Counter Button</button>
+        <p>{{ count }}</p>
+        <script>
+            Vue.createApp({
+                data(){
+                    return{
+                        count: 0
+                    };
+                },
+                methods: {
+                    increase(){
+                        this.count++
+                    }
+                }
+            }).mount("body");
+        </script>
+    </body>
+</html>

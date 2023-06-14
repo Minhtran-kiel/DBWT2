@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8">
+        <script src="https://unpkg.com/vue@3"></script>
+    </head>
+    <body>
+        <div id="app">
+            {{ data.toLowerCase() }}<br>
+            {{ data.toUpperCase() }}<br>
+            
+        </div>
+        <script>
+            let appdata = {
+                data: 'Hello World'
+            }
+            let vm = Vue.createApp({
+                data(){
+                    return appdata;
+            }
+        }).mount('#app');
+        </script>
+    </body>
+</html>

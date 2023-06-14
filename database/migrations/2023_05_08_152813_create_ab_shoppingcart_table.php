@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ab_shoppingcart', function (Blueprint $table) {
-            $table->bigInteger('id')->primary();
+            $table->bigIncrements('id');
             $table->bigInteger('ab_creator_id')->nullable(false);
             $table->timestamp('ab_createdate')->nullable(false);
         });

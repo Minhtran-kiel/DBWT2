@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="utf-8">
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+
+<body>
+    <div id="app">
+        <component-b></component-b>
+    </div>
+
+    <script>
+        let app = Vue.createApp({
+            components: {
+                'componentA': {
+                    template: 
+                    `<div>
+                        <h2>Component A</h2>
+                        <component-b @element-click="handleElementClick"></component-b>
+                        <p>{{ msg }}</p>
+                    </div>`,
+                    data() {
+                        return { msg: '' };
+                    },
+                    methods: {
+                        handleElementClick() {
+                            this.msg = 'Method in Component A called';
+                        }
+                    }
+                },
+
+                'componentB': {
+                    template: 
+                    `<div>
+                        <h2>Component B</h2>
+                        <button @click="emitElementClick">Click me</button>
+                    </div>`,
+                    methods: {
+                        emitElementClick() {
+                            this.$emit('element-click');
+                        }
+                    }
+                }
+            }
+        });
+
+        app.mount('#app');
+    </script>
+</body>
+
+</html>

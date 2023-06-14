@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8">
+        <script src="https://unpkg.com/vue@3"></script>
+    </head>
+    <body>
+        <i id="app">Abalo
+            <div v-html="htmlvar"></div>
+        </i>
+    </body>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    htmlvar:'<b>Vielen Dank</b>'
+                };
+            }
+        }).mount("#app");
+    </script>
+</html>

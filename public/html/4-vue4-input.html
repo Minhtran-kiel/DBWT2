@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8">
+        <script src="https://unpkg.com/vue@3" lang="ts"></script>
+    </head>
+    <body>
+        <div id="app" >
+            {{ inputdata }}<br>
+            <input type="text" v-model="inputdata">
+        </div>
+    </body>
+    <script>
+        Vue.createApp({
+            data(){
+                return {
+                    'inputdata': null
+                };
+            },
+        }).mount("#app");
+    </script>
+</html>

@@ -20,11 +20,16 @@ Route::get('/', function() {
     return view('welcome');
 });
 
+Route::get('/vue', function(){
+    return view('vue');
+});
+
 Route::get('/login', [App\Http\Controllers\AuthController::class, 'login'])->name('login');
 Route::get('/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
 Route::get('/isloggedin', [App\Http\Controllers\AuthController::class, 'isloggedin'])->name('haslogin');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::view('/articles', 'articles')->name('article.index');
 Route::get('/articles',[App\Http\Controllers\ArticleController::class,'index'])->name('articles.index');
 Route::post('/articles', [\App\Http\Controllers\ArticleController::class, 'store'])->name('articles.store');
 Route::get('/kategorien', [App\Http\Controllers\ArticleController::class, 'kategorien'])->name('kategorien');
@@ -38,3 +43,6 @@ Route::get('/career', [App\Http\Controllers\Controller::class, 'show_career'])->
 Route::get('/philosophie', [App\Http\Controllers\Controller::class, 'show_philosophie'])->name('philosophie');
 
 Route::get('/cookiecheck', function(){return view('cookiecheck');});
+
+Route::view('/newsite', 'newsite')->name('newsite');
+

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8">
+        <script src="https://unpkg.com/vue@3"></script>
+    </head>
+    <body>
+        <div id="server" >
+            <a v-if="serverdown">Der Webserver ist zurzeit nicht erreichbar</a>
+        </div>
+    </body>
+    <script>
+        Vue.createApp({
+            data(){
+                return {
+                    serverdown: true
+                };
+            },
+        }).mount("#server");
+    </script>
+</html>

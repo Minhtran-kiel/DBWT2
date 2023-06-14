@@ -12,6 +12,10 @@
         "laravel-vite-plugin": "^0.7.2",
         "sass": "^1.56.1",
         "vite": "^4.0.0",
-        "vue": "^3.2.37"
+        "vue": "^3.3.4"
+    },
+    "dependencies": {
+        "ionic-native": "https://github.com/ionic-team/ionic-native/tarball/v3.5.0",
+        "vue-router": "^4.2.2"
     }
 }
