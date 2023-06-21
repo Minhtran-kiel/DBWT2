@@ -35,8 +35,8 @@ function removeFromBag(article) {
 
     //remove the article from bag
     const index = bag.findIndex(obj => obj.id === article.id);
-    if(index !== -1){
-        bag.splice(index,1);
+    if (index !== -1) {
+        bag.splice(index, 1);
     }
 
 }
@@ -69,7 +69,7 @@ addButtons.forEach(button => {
         const endpoint = 'api/shoppingcart';
         fetch(endpoint, {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 articleId: id
             })
@@ -98,15 +98,15 @@ table.addEventListener('click', event => {
         const endpoint = `api/shoppingcart/1/articles/${articleId}`;
         fetch(endpoint, {
             method: 'DELETE',
-            headers: {'Content-Type': 'application/json'},
-        
+            headers: { 'Content-Type': 'application/json' },
+
         })
             .then(response => response)
             .then(data => console.log(data))
             .catch(error => console.error(error));
 
         //update gui
-        let addButton = document.querySelector('[article_id="'+articleId+'"]');
+        let addButton = document.querySelector('[article_id="' + articleId + '"]');
         addButton.disabled = false;
     }
 });

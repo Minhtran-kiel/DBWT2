@@ -1,20 +1,20 @@
 <template>
     <header class="site-header"></header>
     <h1>Abalo</h1>
+    <sold/>
 </template>
 
 <script>
-import Menu from './Menu.js';
+import Wartung from './Wartung.vue';
+import Sold from './Sold.vue';
+import Angebot from './Angebot.vue';
 
 export default {
     name: 'SiteHeader',
     components: {
-        Menu
+        //Wartung,
+        //Angebot,
+        Sold,
     },
-    mounted(){
-        const menu = new Menu();
-        menu.createMenu();
-        menu.makeMenuDyn();
-    }
 }
 </script>

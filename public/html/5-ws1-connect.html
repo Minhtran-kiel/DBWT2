@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Websocket Example</title>
+    </head>
+    <body>
+        <script>
+            let socket = new WebSocket('ws://localhost:8085/5-ws1-connect');
+
+            socket.onopen = (event) => {
+                console.log('connected');
+            }
+        </script>
+    </body>
+</html>

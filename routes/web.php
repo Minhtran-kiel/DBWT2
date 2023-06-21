@@ -24,9 +24,10 @@ Route::get('/vue', function(){
     return view('vue');
 });
 
-Route::get('/login', [App\Http\Controllers\AuthController::class, 'login'])->name('login');
-Route::get('/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
-Route::get('/isloggedin', [App\Http\Controllers\AuthController::class, 'isloggedin'])->name('haslogin');
+//Route::get('/login', [App\Http\Controllers\AuthController::class, 'login'])->name('login');
+//Route::get('/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
+//Route::get('/isloggedin', [App\Http\Controllers\AuthController::class, 'isloggedin'])->name('haslogin');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::view('/articles', 'articles')->name('article.index');
@@ -45,4 +46,17 @@ Route::get('/philosophie', [App\Http\Controllers\Controller::class, 'show_philos
 Route::get('/cookiecheck', function(){return view('cookiecheck');});
 
 Route::view('/newsite', 'newsite')->name('newsite');
+
+Route::view('/login', 'login')->name('login');
+Route::post('/login', [App\Http\Controllers\MyAuthController::class, 'login'])->name('login');
+
+//test redis
+Route::get('/test-redis', function(){
+    $redis = new \Predis\Client();
+
+    $redis->set('test-key', 'Hello, Redis!');
+    $value = $redis->get('test-key');
+
+    return $value;
+});
 

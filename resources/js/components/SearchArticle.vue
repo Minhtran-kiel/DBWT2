@@ -25,8 +25,7 @@
                         <img :src="getImageUrl(article.id)" width="120" height="85" alt="Article Image">
                     </td>
                     <td>
-                        <button class="add-to-bag" :article_id="article.id" :article_name="article.ab_name"
-                            :article_preis="article.ab_price">+</button>
+                        <angebot-button :articleId="article.id"/>
                     </td>
                 </tr>
             </tbody>
@@ -43,6 +42,7 @@
 
 <script>
 import axios from 'axios';
+import AngebotButton from './AngebotButton.vue';
 
 export default {
     data() {
@@ -53,6 +53,9 @@ export default {
             totalPages: 0,
             isSearching: false,
         };
+    },
+    components: {
+        AngebotButton,
     },
 
     methods: {
